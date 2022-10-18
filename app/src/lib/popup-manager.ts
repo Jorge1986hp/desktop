@@ -11,8 +11,16 @@ export class PopupManager {
     return this.popupStack.at(-1)
   }
 
+  public get isAPopupOpen(): boolean {
+    return this.currentPopup !== undefined
+  }
+
   public getPopupsOfType(popupType: PopupType): ReadonlyArray<Popup> {
     return [...this.popupStack.filter(p => p.type !== popupType)]
+  }
+
+  public isPopupsOfType(popupType: PopupType): boolean {
+    return this.popupStack.some(p => p.type === popupType)
   }
 
   public addPopup(popupToAdd: Popup): Popup {
@@ -20,6 +28,8 @@ export class PopupManager {
     this.popupStack.push(popup)
     return popup
   }
+
+  public updatePopup(popupToUpdate: Popup): Popup {}
 
   public removePopup(popup: Popup) {
     if (popup.id === null) {
